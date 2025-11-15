@@ -1,0 +1,32 @@
+{
+  "name": "json-parser",
+  "version": "1.0.0",
+  "description": "Implementation of a JSON parser in Typescript and nodeJS for the [codingchallengesseries](https://codingchallenges.fyi/challenges/challenge-json-parser)",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Segundavid-Dev/JSON-parser.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Segundavid-Dev/JSON-parser/issues"
+  },
+  "homepage": "https://github.com/Segundavid-Dev/JSON-parser#readme",
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}

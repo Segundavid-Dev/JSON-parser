@@ -1,0 +1,1 @@
+- [Lexical analysis and syntactic analysis](https://people.cs.vt.edu/prsardar/classes/cs3304-Spr19/lectures/CS3304-9-LanguageSyntax-2.pdf)

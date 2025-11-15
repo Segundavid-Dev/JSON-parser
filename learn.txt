@@ -1,0 +1,16 @@
+JSON grammar is a set of production rules that describes the syntax and structure of JSON documents. 
+
+value       ::= object | array | string | number | "true" | "false" | "null"
+object      ::= "{" [ pair ("," pair)* ] "}"
+pair        ::= string ":" value
+array       ::= "[" [ value ("," value)* ] "]"
+string      ::= '"' characters '"'
+characters  ::= "" | character characters
+character   ::= "any Unicode character, except for \", \, and control characters" | escape
+escape      ::= "\" ("\"" | "\\" | "/" | "b" | "f" | "n" | "r" | "t" | "u" hex hex hex hex)
+number      ::= ["-"] int [frac] [exp]
+int         ::= "0" | digit1-9 digits
+frac        ::= "." digits
+exp         ::= ("e" | "E") ["+" | "-"] digits
+digit       ::= "0" | digit1-9
+digits      ::= digit | digit digits
