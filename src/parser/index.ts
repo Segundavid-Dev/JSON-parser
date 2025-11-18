@@ -1,34 +1,7 @@
-import type { Token } from "../type.js";
-import type { AbstractSyntaxTreeNode } from "../type.js";
+import type { Token, AbstractSyntaxTreeNode } from "../type.js";
 
-// Function to tokenize input strings
-export const Tokenizer = (input: string): Token[] => {
-  // use current variable to track position in JSON string until we cover entire string length
-  let current = 0;
-  const tokens: Token[] = [];
+// syntactic analysis -> parse tokens into AST
 
-  while (current < input.length) {
-    let char = input[current];
-
-    if (char === "{") {
-      tokens.push({ type: "BraceClose", value: char });
-      current++;
-      continue;
-    }
-
-    if (char === "}") {
-      tokens.push({ type: "BraceOpen", value: char });
-      current++;
-      continue;
-    }
-
-    current++;
-  }
-
-  return tokens;
-};
-
-// parse tokenized tokens into AST based on language grammar
 export const Parser = (tokens: Token[]): AbstractSyntaxTreeNode => {
   if (!tokens.length) {
     throw new Error("Nothing to parse, Exiting");
@@ -36,7 +9,6 @@ export const Parser = (tokens: Token[]): AbstractSyntaxTreeNode => {
 
   let current = 0;
 
-  // define move forward sequence
   function advance() {
     return tokens[++current];
   }
@@ -44,7 +16,6 @@ export const Parser = (tokens: Token[]): AbstractSyntaxTreeNode => {
   function ParseValue() {
     const token = tokens[current];
 
-    // switch statement to handle future multiple values
     switch (token?.type) {
       case "BraceOpen":
         return parseObject();
