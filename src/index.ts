@@ -1,8 +1,8 @@
-import { read, readFileSync } from "fs";
+import { readFileSync } from "fs";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
-import { Parser } from "./parser/index";
-import { Tokenizer } from "./lexer/index";
+import { Parser } from "./parser/index.js";
+import { Tokenizer } from "./lexer/index.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -26,5 +26,6 @@ function validateJSON(filePath: string) {
   }
 }
 
+console.log(filePath);
 const result = validateJSON(filePath);
 console.log(result);
