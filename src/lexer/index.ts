@@ -1,6 +1,6 @@
 import type { Token } from "../type.js";
 
-// lexical analysis -> Read input strings and output into tokens
+// lexical analysis -> Read input strings and output token streams
 
 export const Tokenizer = (input: string): Token[] => {
   let current = 0;
@@ -10,13 +10,13 @@ export const Tokenizer = (input: string): Token[] => {
     let char = input[current];
 
     if (char === "{") {
-      tokens.push({ type: "BraceClose", value: char });
+      tokens.push({ type: "BraceOpen", value: char });
       current++;
       continue;
     }
 
     if (char === "}") {
-      tokens.push({ type: "BraceOpen", value: char });
+      tokens.push({ type: "BraceClose", value: char });
       current++;
       continue;
     }

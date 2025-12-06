@@ -1,8 +1,10 @@
 import type { Token, AbstractSyntaxTreeNode } from "../type.js";
 
-// syntactic analysis -> parse tokens into AST
+// syntactic analysis -> parse tokens into Abstract Syntax Tree
 
 export const Parser = (tokens: Token[]): AbstractSyntaxTreeNode => {
+  console.log(tokens.length);
+
   if (!tokens.length) {
     throw new Error("Nothing to parse, Exiting");
   }

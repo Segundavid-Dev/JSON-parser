@@ -1,15 +1,19 @@
 import { readFileSync } from "fs";
-import { dirname, join } from "path";
+import path from "path";
 import { fileURLToPath } from "url";
+import { dirname } from "path";
 import { Parser } from "./parser/index.js";
 import { Tokenizer } from "./lexer/index.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const filePath = join(__dirname, "../tests/step1/valid.json");
+console.log(__dirname);
+
+const filePath = path.join(__dirname, "../tests/step1/valid.json");
 
 function validateJSON(filePath: string) {
   try {
+    // reads json as string
     const jsonString = readFileSync(filePath, "utf-8");
 
     // Tokenize
@@ -17,8 +21,8 @@ function validateJSON(filePath: string) {
     console.log(tokens);
 
     // Parse
-    const parse = Parser(tokens);
-    console.log(parse);
+    const parseTree = Parser(tokens);
+    console.log(parseTree);
     return 1;
   } catch (error) {
     console.log("Invalid JSON format", error);
@@ -26,6 +30,7 @@ function validateJSON(filePath: string) {
   }
 }
 
-console.log(filePath);
 const result = validateJSON(filePath);
-console.log(result);
+
+if (result === 0) console.log("Invalid JSON format!");
+if (result === 1) console.log("Valid JSON format");
