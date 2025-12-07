@@ -10,7 +10,7 @@ const __dirname = dirname(__filename);
 console.log(__dirname);
 
 // Just change filepath here to test for all json case
-const filePath = path.join(__dirname, "../tests/step2/invalid2.json");
+const filePath = path.join(__dirname, "../tests/step3/valid.json");
 
 function validateJSON(filePath: string) {
   try {

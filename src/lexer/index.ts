@@ -51,8 +51,40 @@ export const Tokenizer = (input: string): Token[] => {
       continue;
     }
 
-    // tricky part -> Handling strings
+    if (/[a-z]/.test(char)) {
+      let value = "";
+
+      while (current < input.length && /[a-z]/.test(input[current])) {
+        value += input[current];
+        current++;
+      }
+
+      if (value === "true") {
+        tokens.push({ type: "True", value });
+      } else if (value === "false") {
+        tokens.push({ type: "False", value });
+      } else if (value === "null") {
+        tokens.push({ type: "Null", value });
+      } else {
+        throw new Error(`Unexpected keyword: ${value}`);
+      }
+      continue;
+    }
+
+    if (/[0-9-]/.test(char)) {
+      let value = "";
+
+      while (current < input.length && /[0-9.\-eE+]/.test(input[current])) {
+        value += input[current];
+        current++;
+      }
+
+      tokens.push({ type: "Number", value });
+      continue;
+    }
+
     if (char === '"') {
+      // tricky part -> Handling strings
       let value = "";
       char = input[++current];
 
