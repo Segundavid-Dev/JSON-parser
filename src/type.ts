@@ -7,7 +7,9 @@ export type TokenType =
   | "True"
   | "False"
   | "Null"
-  | "BracketOpen";
+  | "BracketOpen"
+  | "BracketClose"
+  | "Comma";
 
 export type Token = {
   type: TokenType;
@@ -23,4 +25,5 @@ export type AbstractSyntaxTreeNode =
   | { type: "String"; value: string }
   | { type: "Number"; value: number }
   | { type: "Boolean"; value: boolean }
-  | { type: "Null"; value: null };
+  | { type: "Null" }
+  | { type: "Array"; value: AbstractSyntaxTreeNode[] };
