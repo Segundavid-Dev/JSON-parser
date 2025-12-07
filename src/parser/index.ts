@@ -51,22 +51,28 @@ export const Parser = (tokens: Token[]): AbstractSyntaxTreeNode => {
 
   function parseObject() {
     const node: AbstractSyntaxTreeNode = { type: "Object", value: {} };
-    let token = advance(); // Eat '{'
+    let token = advance();
 
     while (token?.type !== "BraceClose") {
       if (token.type === "String") {
         const key = token.value;
-        token = advance(); // Eat key
+        token = advance();
         if (token.type !== "Colon") throw new Error("Expected key-value pair");
 
-        token = advance(); // Eat :
+        token = advance();
         const value = ParseValue();
         node.value[key] = value;
       } else {
         throw new Error("Expected string key in object");
       }
       token = advance();
-      if (token.type === "Comma") token = advance();
+      if (token.type === "Comma") {
+        token = advance();
+
+        if (token.type === "BraceClose") {
+          throw new Error("Unexpected trailing comma");
+        }
+      }
     }
 
     return node;

@@ -9,25 +9,15 @@ export const Tokenizer = (input: string): Token[] => {
   while (current < input.length) {
     let char = input[current];
 
-    if (char === "{") {
-      tokens.push({ type: "BraceOpen", value: char });
+    // skip whitespace
+    if (/\s/.test(char)) {
       current++;
       continue;
     }
 
-    // handling strings
-    if (char === '"') {
-      let value = "";
-      char = input[++current];
-
-      while (char !== '"') {
-        value += char;
-        char = input[++current];
-      }
-      // increment token immediately to skip colon checks
+    if (char === "{") {
+      tokens.push({ type: "BraceOpen", value: char });
       current++;
-
-      tokens.push({ type: "String", value });
       continue;
     }
 
@@ -37,7 +27,45 @@ export const Tokenizer = (input: string): Token[] => {
       continue;
     }
 
-    current++;
+    if (char === "[") {
+      tokens.push({ type: "BracketOpen", value: char });
+      current++;
+      continue;
+    }
+
+    if (char === "]") {
+      tokens.push({ type: "BracketClose", value: char });
+      current++;
+      continue;
+    }
+
+    if (char === ":") {
+      tokens.push({ type: "Colon", value: char });
+      current++;
+      continue;
+    }
+
+    if (char === ",") {
+      tokens.push({ type: "Comma", value: char });
+      current++;
+      continue;
+    }
+
+    // tricky part -> Handling strings
+    if (char === '"') {
+      let value = "";
+      char = input[++current];
+
+      while (char !== '"') {
+        value += char;
+        char = input[++current];
+      }
+      current++;
+      tokens.push({ type: "String", value });
+      continue;
+    }
+
+    throw new Error("Unexpected character");
   }
 
   return tokens;
