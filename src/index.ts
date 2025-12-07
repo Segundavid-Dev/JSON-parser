@@ -9,7 +9,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 console.log(__dirname);
 
-const filePath = path.join(__dirname, "../tests/step1/valid.json");
+// Just change filepath here to test for all json case
+const filePath = path.join(__dirname, "../tests/step2/valid.json");
 
 function validateJSON(filePath: string) {
   try {

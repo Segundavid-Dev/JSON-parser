@@ -15,6 +15,22 @@ export const Tokenizer = (input: string): Token[] => {
       continue;
     }
 
+    // handling strings
+    if (char === '"') {
+      let value = "";
+      char = input[++current];
+
+      while (char !== '"') {
+        value += char;
+        char = input[++current];
+      }
+      // increment token immediately to skip colon checks
+      current++;
+
+      tokens.push({ type: "String", value });
+      continue;
+    }
+
     if (char === "}") {
       tokens.push({ type: "BraceClose", value: char });
       current++;
